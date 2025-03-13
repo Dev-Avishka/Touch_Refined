@@ -4,8 +4,12 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"time"
 )
 
+func wait(seconds int) {
+	time.Sleep(time.Duration(seconds) * time.Second)
+}
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Please provide a file name")
@@ -56,6 +60,21 @@ func main() {
 			fmt.Println("You need to be over 18 to create this file")
 			return
 		}
+
+	} else if strings.ToLower(file_name) == "devil" {
+		fmt.Print("Thou hast embraced darkness")
+		fmt.Println("proceed with caution")
+		file_name += ".txt"
+	} else if strings.ToLower(file_name) == "satan" {
+		fmt.Print("Thou hast embraced darkness")
+		fmt.Println("proceed with caution")
+		file_name += ".txt"
+
+	} else if strings.ToLower(file_name) == "grass" {
+		fmt.Print("Impossible ")
+		wait(1)
+		fmt.Print("You must go outside")
+		return
 	}
 
 	file_extension := ""
