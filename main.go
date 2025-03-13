@@ -12,8 +12,7 @@ func main() {
 		return
 	}
 	file_name := os.Args[1]
-
-	if file_name == "minors" {
+	if strings.ToLower(file_name) == "minors" {
 		fmt.Print("Are you sure you want to continue? (y/n): ")
 		var response string
 		fmt.Scanln(&response)
@@ -25,6 +24,36 @@ func main() {
 
 		} else {
 			fmt.Println("Operation cancelled")
+			return
+		}
+	} else if strings.ToLower(file_name) == "god" {
+		fmt.Println("Thou need heavenly approval to create such a file")
+		fmt.Println("Thou is not worthy")
+		return
+	} else if strings.ToLower(file_name) == "hawkings" {
+		fmt.Print("Are you sure you want to continue? (y/n): ")
+		var response string
+		fmt.Scanln(&response)
+		if response == "y" || response == "Y" {
+			fmt.Println("Creating file")
+			fmt.Println("Be warned, this file has nothing to do with hawkings")
+			file_name += ".txt"
+
+		} else {
+			fmt.Println("Operation cancelled")
+			return
+		}
+	} else if strings.ToLower(file_name) == "epstein" {
+		fmt.Print("Are you over 18? (y/n): ")
+		var response string
+		fmt.Scanln(&response)
+		if response == "y" || response == "Y" {
+			fmt.Println("Creating file")
+			fmt.Println("Nothing to see here")
+			file_name += ".txt"
+
+		} else {
+			fmt.Println("You need to be over 18 to create this file")
 			return
 		}
 	}
@@ -114,6 +143,29 @@ func main() {
 		}
 
 		_, err = file.WriteString("<!DOCTYPE html>\n<html>\n<head>\n    <title>Hello World</title>\n</head>\n<body>\n    <h1>Hello World!</h1>\n</body>\n</html>")
+		if err != nil {
+			fmt.Println("Error writing to file:", err)
+			file.Close()
+			return
+		}
+
+		err = file.Sync()
+		if err != nil {
+			fmt.Println("Error syncing file:", err)
+		}
+		file.Close()
+		fmt.Println("Created file ", file_name)
+
+	} else if file_extension == ".java" {
+		//add java code to file
+		file, err := os.Create(file_name)
+		if err != nil {
+			fmt.Println("Error creating file:", err)
+			return
+		}
+
+		className := strings.TrimSuffix(file_name, ".java")
+		_, err = file.WriteString("public class " + className + " {\n    public static void main(String[] args) {\n        System.out.println(\"Hello, World!\");\n    }\n}")
 		if err != nil {
 			fmt.Println("Error writing to file:", err)
 			file.Close()
