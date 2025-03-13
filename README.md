@@ -20,7 +20,7 @@ build.bat
 then the new file will be created in the touch folder in the project
 relocate that to C:\ or any other directory and then add it to path
 
-##how to use
+## how to use
 for basic text file
 ```bash
 touch filename.txt
