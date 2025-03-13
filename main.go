@@ -6,7 +6,40 @@ import (
 	"strings"
 )
 
+var count_file string = "count.txt"
+
+func incrementCount() {
+	file, err := os.OpenFile(count_file, os.O_RDWR|os.O_CREATE, 0666)
+	if err != nil {
+		fmt.Println("Error opening count file:", err)
+		return
+	}
+	defer file.Close()
+
+	var count int
+	_, err = fmt.Fscanf(file, "%d", &count)
+	if err != nil && err.Error() != "EOF" {
+		fmt.Println("Error reading count file:", err)
+		return
+	}
+
+	count++
+	if count == 5 {
+		fmt.Println("Remember to donate to me so I can buy treats for my dog")
+		fmt.Println("And a sandwich for me to keep coding...")
+		fmt.Println("But ultimately, your donation will be fueling my coding session at the nearby cafe!")
+		fmt.Println("https://buymeacoffee.com/devavishka")
+	}
+	file.Seek(0, 0)
+	_, err = fmt.Fprintf(file, "%d", count)
+	if err != nil {
+		fmt.Println("Error writing to count file:", err)
+		return
+	}
+}
+
 func main() {
+	incrementCount()
 	if len(os.Args) < 2 {
 		fmt.Println("Please provide a file name")
 		return
@@ -29,6 +62,8 @@ func main() {
 	} else if strings.ToLower(file_name) == "god" {
 		fmt.Println("Thou need heavenly approval to create such a file")
 		fmt.Println("Thou is not worthy")
+		fmt.Println("But thy wallet is worthy to donate to me")
+		fmt.Println("https://buymeacoffee.com/devavishka")
 		return
 	} else if strings.ToLower(file_name) == "hawkings" {
 		fmt.Print("Are you sure you want to continue? (y/n): ")
@@ -69,6 +104,12 @@ func main() {
 	} else if strings.ToLower(file_name) == "grass" {
 		fmt.Println("Impossible ")
 		fmt.Println("You must go outside")
+		fmt.Println("But you can touch your wallet and donate to me")
+		fmt.Println("https://buymeacoffee.com/devavishka")
+		return
+	} else if strings.ToLower(file_name) == "donate" {
+		fmt.Println("Donate to me so I can buy a sandwich and continue coding")
+		fmt.Println("https://buymeacoffee.com/devavishka")
 		return
 	}
 
