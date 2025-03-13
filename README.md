@@ -13,7 +13,7 @@ The file types that are supported are:
 .html
 ```
 
-##how to build 
+## how to build 
 ```bash
 build.bat
 ```
