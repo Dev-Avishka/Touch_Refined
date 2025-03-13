@@ -4,12 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"time"
 )
 
-func wait(seconds int) {
-	time.Sleep(time.Duration(seconds) * time.Second)
-}
 func main() {
 	if len(os.Args) < 2 {
 		fmt.Println("Please provide a file name")
@@ -71,9 +67,8 @@ func main() {
 		file_name += ".txt"
 
 	} else if strings.ToLower(file_name) == "grass" {
-		fmt.Print("Impossible ")
-		wait(1)
-		fmt.Print("You must go outside")
+		fmt.Println("Impossible ")
+		fmt.Println("You must go outside")
 		return
 	}
 
