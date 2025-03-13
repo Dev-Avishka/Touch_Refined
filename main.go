@@ -3,13 +3,22 @@ package main
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
 var count_file string = "count.txt"
 
 func incrementCount() {
-	file, err := os.OpenFile(count_file, os.O_RDWR|os.O_CREATE, 0666)
+	exePath, err := os.Executable()
+	if err != nil {
+		fmt.Println("Error getting executable path:", err)
+		return
+	}
+	exeDir := filepath.Dir(exePath)
+	countFilePath := filepath.Join(exeDir, count_file)
+
+	file, err := os.OpenFile(countFilePath, os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		fmt.Println("Error opening count file:", err)
 		return
@@ -29,6 +38,7 @@ func incrementCount() {
 		fmt.Println("And a sandwich for me to keep coding...")
 		fmt.Println("But ultimately, your donation will be fueling my coding session at the nearby cafe!")
 		fmt.Println("https://buymeacoffee.com/devavishka")
+		count = 0
 	}
 	file.Seek(0, 0)
 	_, err = fmt.Fprintf(file, "%d", count)
